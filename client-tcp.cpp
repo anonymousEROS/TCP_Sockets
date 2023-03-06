@@ -53,9 +53,6 @@ int main(int argc, char *argv[])
       exit(-1);
    }
    
-   
-   
-   // PASTE CODE FROM STEP #1 HERE
     // Initialize data structure
     sockme.sin_family = AF_INET;
 
@@ -66,10 +63,7 @@ int main(int argc, char *argv[])
         exit(-1);
     }
    
-   
-   
-   
-   // PASTE CODE FROM STEP #2 HERE
+   //setting port number for socket connection
     sockme.sin_port = htons(portnum);
    
    
@@ -81,7 +75,6 @@ int main(int argc, char *argv[])
    // Run indefinitely, until the user enters the /QUIT command
    while(true)
    {
-      // PASTE CODE FROM STEP #3 HERE
        s = socket(PF_INET, SOCK_STREAM, 0);
 
        if ((result = connect (s, (struct sockaddr *) &sockme, sizeof(sockme))))
@@ -121,8 +114,6 @@ int main(int argc, char *argv[])
       cout << "Message: " << msg << endl;
       cout << "Message size: " << total_characters << endl;
 
-      
-      // PASTE CODE FROM STEP #4 HERE
        result = send (s, msg.c_str(), total_characters, 0);
 
        if (result == -1)
@@ -144,8 +135,6 @@ int main(int argc, char *argv[])
       char *bp = bufin;
       int cnt = MAXBUF;
       
-      
-      // PASTE CODE FROM STEP #5 HERE
        while ( (n = recv (s, bp, cnt, 0)) > 0 )
        {
            bp += n;

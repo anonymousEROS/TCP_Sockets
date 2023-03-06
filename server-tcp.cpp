@@ -38,19 +38,14 @@ int main(int argc, char *argv[])
    }
    
    
-   // PASTE CODE FROM STEP #2 HERE
+   //setting up socket endpoint
     struct sockaddr_in sockme, newsockme;
     sockme.sin_family = AF_INET;
     sockme.sin_addr.s_addr = INADDR_ANY;
     sockme.sin_port = htons(portnum);
 
 
-   
-   
-   
-   // PASTE CODE FROM STEP #3 HERE
-
-
+   // setting up socket connection using TCP protocol
     s = socket(PF_INET, SOCK_STREAM, 0);
 
     bind(s, (struct sockaddr *) &sockme, sizeof(sockme));
@@ -59,9 +54,6 @@ int main(int argc, char *argv[])
 // Queue up to 20 incoming requests
     result = listen(s, 20);
 
-
-   
-   
    cout << "Server started" << endl;
    cout << "Listening on port " << portnum << endl;
    
@@ -69,7 +61,8 @@ int main(int argc, char *argv[])
    while (1)
    {         // servers never sleep...
       
-      // PASTE CODE FROM STEP #4 HERE
+      // accepting an incoming connection on a listening socket 
+      //and creating new socket endpoint for communication with client
        socklen_t alen = sizeof(newsockme);
        childs = accept(s, (struct sockaddr *) &newsockme, &alen);
 
@@ -87,9 +80,6 @@ int main(int argc, char *argv[])
       
       cout << "Received: " << bufin << endl;
       
-      
-      
-      // PASTE CODE FROM STEP #5 HERE
        // Just echo what was sent
        result = send (childs, bufin, strlen(bufin), 0);
        result = close(childs);
